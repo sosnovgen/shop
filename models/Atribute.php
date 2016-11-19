@@ -7,28 +7,25 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 
 
-class Category extends \yii\db\ActiveRecord
+class Atribute extends \yii\db\ActiveRecord
 {
-    /**
-     * @inheritdoc
-     */
+
     public static function tableName()
     {
-        return 'category';
+        return 'atribute';
     }
 
-    /**
-     * @inheritdoc
-     */
+    /*-----------------------------------------------------------*/
+
+
+    /*-----------------------------------------------------------*/
     public function rules()
     {
         return [
-            [['title','parent_id'], 'required'],
-            [['atribut_id','parent_id'], 'integer'],
-            ['parent_id','default', 'value' => '0'],
+            [['category_id','articles_id'], 'integer'],
+            [['key','value'], 'string', 'max' => 128],
             [['created_at'], 'safe'],
-            [['body'], 'string'],
-            [['title', 'preview'], 'string', 'max' => 36],
+
         ];
     }
 

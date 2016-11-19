@@ -4,6 +4,7 @@ use \yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\StringHelper;
+use app\models\Category;
 
 ?>
 
@@ -22,16 +23,32 @@ echo GridView::widget([
         [
             'label' => 'Картинка',
             'format' => 'raw',
-            'contentOptions'=>['width' => '100'],
+            'contentOptions'=>['width' => '80'],
             'value' => function($data){
                 return Html::img(Url::toRoute($data -> preview),[
                     'alt'=>'',
-                    'style' => 'width:60px; height:40px;'
+                    'style' => 'width:40px; height:40px;'
                 ]);
             },
         ],
-        'title:text:Заголовок',
-        /*'content:text:Текст',*/
+        'title:text:Категория',
+        /*'parent_id:text:Родитель',*/
+        [
+            'label' => 'Родитель',
+            'attribute' => 'parent_id',
+            'value' => function ($data) {
+                $parent = $data -> parent_id;
+                if ($customer = Category::findOne(['id' => $parent]))
+                {
+                    return $customer -> title;
+                }
+                else return 'root';
+            }
+
+
+
+        ],
+
         [
             'label' => 'Описание',
             'attribute' => 'body',

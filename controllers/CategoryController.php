@@ -22,6 +22,17 @@ class CategoryController extends \yii\web\Controller
         // configure with favored image driver (gd by default)
         Image::configure(array('driver' => 'GD'));
 
+        $param = ['options' =>[ '' => ['Selected' => false]]];
+
+        $plans = Category::find() ->all();
+        foreach ($plans as $plan):
+            $list[$plan ->id] = $plan ->title;
+        endforeach;
+
+        //insert in the beginning of an array
+        $x = array('root');
+        $list = $x + $list;
+
         $model = new Category();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -54,6 +65,8 @@ class CategoryController extends \yii\web\Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'list' => $list,
+                'param' => $param,
             ]);
         }
     }
@@ -78,6 +91,17 @@ class CategoryController extends \yii\web\Controller
         $model = $this->findModel($id);
         $oldFileName = $model->preview;
 
+        $param = ['options' =>[ $model ->id => ['Selected' => true]]];
+
+        $plans = Category::find() ->all();
+        foreach ($plans as $plan):
+            $list[$plan ->id] = $plan ->title ;
+        endforeach;
+
+        //insert in the beginning of an array
+        $x = array('root');
+        $list = $x + $list;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $fileName = UploadedFile::getInstance($model, 'preview');
@@ -101,6 +125,8 @@ class CategoryController extends \yii\web\Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'list' => $list,
+                'param' => $param,
             ]);
         }
     }
@@ -131,6 +157,30 @@ class CategoryController extends \yii\web\Controller
             throw new NotFoundHttpException('Этой страницы не существует.');
         }
     }
-    
-    
+
+    /*-----------------------------------------------------------*/
+    public function actionTree()
+    {
+        //Выбираем данные из БД
+        $result = Category::find() ->all();
+
+        if  (count($result) > 0){
+
+            $cats = array(); //создать новый     массив
+            //заполнить:
+            foreach($result as $cat) {
+                $cats_ID[$cat['id']][] = $cat;
+                $cats[$cat['parent_id']][$cat['id']] =  $cat;
+            }
+        }
+
+        return $this->render('tree',
+        
+            [
+             'cats' => $cats,
+
+            ]);
+    }
+
+
 }

@@ -69,10 +69,13 @@ AppAsset::register($this);  // $this represents the view object
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="javascript:;" data-toggle="collapse" data-target="#lisp"><i class="fa fa-fw fa-edit"></i>  Категории <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#lisp"><i class="fa fa-fw fa-folder-open-o"></i>  Категории <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="lisp" class="collapse">
-                            <li>
+                            <li >
                                 <a href="<?php echo Url::toRoute('category/view')?>"> Показать все</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo Url::toRoute('category/tree')?>"> Дерево</a>
                             </li>
                             <li>
                                 <a href="<?php echo Url::toRoute('category/create')?>"> Добавить новую</a>
@@ -80,7 +83,7 @@ AppAsset::register($this);  // $this represents the view object
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#lisp_2"><i class="fa fa-fw fa-pencil"></i> Товары<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#lisp_2"><i class="fa fa-fw fa-gift"></i> Товары<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="lisp_2" class="collapse">
                             <li>
                                 <a href="<?php echo Url::toRoute('articles/view')?>"> Показать все</a>
@@ -91,7 +94,7 @@ AppAsset::register($this);  // $this represents the view object
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#lisp_3"><i class="fa fa-fw fa-list-alt"></i> Подробно<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#lisp_3"><i class="fa fa-fw fa-list"></i> Атрибуты<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="lisp_3" class="collapse">
                             <li>
                                 <a href="<?php echo Url::toRoute('full/view')?>"> Показать все</a>

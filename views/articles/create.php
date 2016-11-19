@@ -45,16 +45,45 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 
-    <span class="small pull-right">* Перенос строки клавиши: Shift + Enter </span>
-    <?= $form->field($model, 'body')-> textArea(['rows' => '6','id' => 'editor']) -> label('Текст'); ?>
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" style="font-weight: bold; font-size: 0.9em;" href="#collapse1">Описание товара</a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body">
 
-    <h2>Meta</h2>
-    <div class="row">
-        <div class="col-md-6">
-            <?= $form->field($model, 'meta_description')->textInput()->label('description'); ?>
+                    <span class="small pull-right">* Перенос строки клавиши: Shift + Enter </span>
+                    <?= $form->field($model, 'body')-> textArea(['rows' => '6','id' => 'editor']) -> label(''); ?>
+
+
+
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-            <?= $form->field($model, 'meta_keywords')->textInput()->label('keywords'); ?>
+    </div>
+
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" style="font-weight: bold; font-size: 0.9em;" href="#collapse2">Meta</a>
+                </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'meta_description')->textInput()->label('description'); ?>
+                        </div>
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'meta_keywords')->textInput()->label('keywords'); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -11,16 +11,19 @@ use yii\widgets\ActiveForm;
 
 
     <div class="row capture">
-        <h3>Главная страница</h3>
+        <h3>Категория</h3>
     </div>
 
     <br>
 
     <div class="row">
-        <div class="col-md-6">
-            <?= $form->field($model, 'title')->textInput()->label('Заголовок'); ?>
+        <div class="col-md-4">
+            <?= $form->field($model, 'title')->textInput()->label('Название'); ?>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
+            <?= $form->field($model, 'parent_id')->dropDownList($list, $param)->label('Родитель'); ?>
+        </div>
+        <div class="col-md-4">
             <?= $form->field($model, 'preview')->fileInput(['class' => 'filestyle', 'data-buttonText'=> 'Выбрать'])->label('Картинка'); ?>
         </div>
         
