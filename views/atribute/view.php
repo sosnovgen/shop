@@ -4,11 +4,12 @@ use \yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\StringHelper;
+use app\models\Category;
 
 ?>
 
     <div class="row capture">
-        <h3 class="text-center">Товары</h3>
+        <h3 class="text-center">Атрибуты</h3>
     </div>
 
 <div class="table-responsive">
@@ -19,33 +20,10 @@ echo GridView::widget([
     'columns' => [
         /*['class' => 'yii\grid\SerialColumn'],*/
         'id:text:id',
-        [
-            'label' => 'Картинка',
-            'format' => 'raw',
-            'contentOptions'=>['width' => '80'],
-            'value' => function($data){
-                return Html::img(Url::toRoute($data -> preview),[
-                    'alt'=>'',
-                    'style' => 'width:40px; height:40px;'
-                ]);
-            },
-        ],
-        
-        'title:text:Название',
-        'category.title:text:Категория',
-         'group_id:text:Группа',
-        
-        [
-            'label' => 'Описание',
-            'attribute' => 'body',
-            'value' => function ($data) {
-                return StringHelper::truncate($data->body, 100);
-            }
-        ],
-        
-        'cena:text:цена',
-        
-        /*'created_at:date:Создано',*/
+        'articles.title:text:Товар',
+        'key:text:key',
+        'value:text:value',
+ 
         [
             'label' => 'Создано',
             'attribute' => 'created_at',
@@ -54,16 +32,13 @@ echo GridView::widget([
         ],
 
         [
-
-
-
             'class' => 'yii\grid\ActionColumn',
             'header'=>'Действия',
             'headerOptions' => ['width' => '60'],
             'template' => '{add} {update} {delete}{link}',
             'buttons' => [
                 'add' => function($url, $model){
-                    return Html::a('<span class="glyphicon glyphicon-font"></span>', ['atribute/view','id'=> $model->id],  [
+                    return Html::a('<span class="glyphicon glyphicon-plus"></span>', ['create', 'id' => $model->articles_id], [
                         'class' => '',
                         'data' => [
                             'method' => 'post',
@@ -72,7 +47,7 @@ echo GridView::widget([
                 },
 
                 'delete' => function($url, $model){
-                    return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->id], [
+                    return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->id, 'id2' => $model->articles_id], [
                         'class' => '',
                         'data' => [
                             'confirm' => 'Удалить запись?',
@@ -84,6 +59,7 @@ echo GridView::widget([
         ],
 
     ],
+    // ...
 
 ]);
 

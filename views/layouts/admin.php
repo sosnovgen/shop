@@ -97,11 +97,11 @@ AppAsset::register($this);  // $this represents the view object
                         <a href="javascript:;" data-toggle="collapse" data-target="#lisp_3"><i class="fa fa-fw fa-list"></i> Атрибуты<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="lisp_3" class="collapse">
                             <li>
-                                <a href="<?php echo Url::toRoute('full/view')?>"> Показать все</a>
+                                <a href="<?php echo Url::toRoute('atribute/viewf')?>"> Показать все</a>
                             </li>
-                            <li>
-                                <a href="<?php echo Url::toRoute('full/create')?>"> Добавить новый</a>
-                            </li>
+                            <!--<li>
+                                <a href="<?php /*echo Url::toRoute('atribute/create')*/?>"> Добавить новые</a>
+                            </li>-->
                         </ul>
                     </li>
                     <li>

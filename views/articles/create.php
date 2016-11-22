@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 ?>
 
@@ -45,6 +46,7 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 
+    <!----------------------------- описание товара ---------------------------------->
     <div class="panel-group">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -58,13 +60,12 @@ use yii\widgets\ActiveForm;
                     <span class="small pull-right">* Перенос строки клавиши: Shift + Enter </span>
                     <?= $form->field($model, 'body')-> textArea(['rows' => '6','id' => 'editor']) -> label(''); ?>
 
-
-
                 </div>
             </div>
         </div>
     </div>
 
+    <!----------------------------- Meta ---------------------------------->
     <div class="panel-group">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -87,8 +88,29 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 
+    <!----------------------------- Атрибуты ---------------------------------->
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" style="font-weight: bold; font-size: 0.9em;" href="#collapse3">Атрибуты</a>
+                </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="row">
+
+                        <a href="<?php echo Url::toRoute(['atribute/create', 'id' => 123])?>" >Создать атрибут</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <br>
+
+
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>

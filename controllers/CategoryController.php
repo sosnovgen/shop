@@ -36,7 +36,6 @@ class CategoryController extends \yii\web\Controller
         $model = new Category();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
             $fileName = UploadedFile::getInstance($model, 'preview');
 
             if ($fileName !== null) {
