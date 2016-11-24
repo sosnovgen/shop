@@ -10,9 +10,35 @@ use app\models\Category;
 <button type="button" class="close" onclick="history.back();">&times;</button>
 
 <div class="row capture">
-    <h3 class="text-center">Атрибуты (full)</h3>
-</div>
+    <div class="col-md-8" >
+        <h3 class="text-center">Шаблоны</h3>
+    </div>
+    <div class="col-md-3" style="padding-top: 16px;">
+        <label for="category_id">Выбрать категорию</label>
+        <select onchange="window.location.href=this.options[this.selectedIndex].value" name="category_id" class="form-control" id="select_cat">
+            <option value="<?php echo Url::toRoute(['atribute/viewt','id' => '-211']); ?>"  >Все</option>
 
+            <?php foreach($categories as $row):?>
+
+                <option value="<?php echo Url::toRoute(['atribute/viewt','id'=> $row ->id])?>"
+                    <?php  if ($id != '-211'): ?> <!--если не "показать всё"-->
+
+                        <?php if ($id == $row ->id)
+                          {echo ' selected';} ?>
+
+                    <?php endif ?>
+                ><?php echo $row ->title ?>
+
+                </option>
+
+            <?php endforeach;?>
+
+        </select>
+    </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+<br>
 <div class="table-responsive">
 
     <?php
@@ -21,7 +47,6 @@ use app\models\Category;
         'columns' => [
             /*['class' => 'yii\grid\SerialColumn'],*/
             'id:text:id',
-            'articles.title:text:Товар',
             'category.title:text:Категория',
             'key:text:key',
             'value:text:value',

@@ -10,5 +10,5 @@ use app\models\Category;
 
 <h3>Test</h3>
 <br>
-<?php var_dump($id);  ?>
+<?php var_dump($categories);  ?>
 

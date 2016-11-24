@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 ?>
 
+    <button type="button" class="close" onclick="history.back();">&times;</button>
+
 <h3>Tree</h3>
 <br>
 

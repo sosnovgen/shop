@@ -7,6 +7,7 @@ use yii\helpers\StringHelper;
 use app\models\Category;
 
 ?>
+<button type="button" class="close" onclick="history.back();">&times;</button>
 
     <div class="row capture">
         <h3 class="text-center">Категории</h3>

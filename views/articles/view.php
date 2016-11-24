@@ -6,7 +6,7 @@ use yii\helpers\Url;
 use yii\helpers\StringHelper;
 
 ?>
-
+<button type="button" class="close" onclick="history.back();">&times;</button>
     <div class="row capture">
         <h3 class="text-center">Товары</h3>
     </div>

@@ -99,9 +99,9 @@ AppAsset::register($this);  // $this represents the view object
                             <li>
                                 <a href="<?php echo Url::toRoute('atribute/viewf')?>"> Показать все</a>
                             </li>
-                            <!--<li>
-                                <a href="<?php /*echo Url::toRoute('atribute/create')*/?>"> Добавить новые</a>
-                            </li>-->
+                            <li>
+                                <a href="<?php echo Url::toRoute(['atribute/viewt', 'id' => '-211'])?>"> Шаблон</a>
+                            </li>
                         </ul>
                     </li>
                     <li>

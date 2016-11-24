@@ -7,9 +7,16 @@ use yii\helpers\StringHelper;
 use app\models\Category;
 
 ?>
+<button type="button" class="close" onclick="history.back();">&times;</button>
 
     <div class="row capture">
-        <h3 class="text-center">Атрибуты</h3>
+       <div class="col-md-8" >
+            <h3 class="text-center">Атрибуты</h3>
+       </div>
+       <div class="col-md-3" style="padding-top: 16px;">
+           <?= Html::a('Сохранить как шаблон', ['atribute/tample', 'id' => $id], ['class'=>'btn btn-default btn-block']) ?>
+       </div>
+        <div class="col-md-1"></div>
     </div>
 
 <div class="table-responsive">
@@ -21,8 +28,9 @@ echo GridView::widget([
         /*['class' => 'yii\grid\SerialColumn'],*/
         'id:text:id',
         'articles.title:text:Товар',
-        'key:text:key',
-        'value:text:value',
+        'category.title:text:Категория',
+        'key:text:Свойство',
+        'value:text:Значение',
  
         [
             'label' => 'Создано',
