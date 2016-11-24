@@ -86,7 +86,7 @@ AppAsset::register($this);  // $this represents the view object
                         <a href="javascript:;" data-toggle="collapse" data-target="#lisp_2"><i class="fa fa-fw fa-gift"></i> Товары<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="lisp_2" class="collapse">
                             <li>
-                                <a href="<?php echo Url::toRoute('articles/view')?>"> Показать все</a>
+                                <a href="<?php echo Url::toRoute(['articles/viewt', 'id' => '-211'])?>"> Показать все</a>
                             </li>
                             <li>
                                 <a href="<?php echo Url::toRoute('articles/create')?>"> Добавить товар</a>

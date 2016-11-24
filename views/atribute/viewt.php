@@ -11,7 +11,7 @@ use app\models\Category;
 
 <div class="row capture">
     <div class="col-md-8" >
-        <h3 class="text-center">Шаблоны</h3>
+        <h3 class="text-center" style="padding-top:12px;">Шаблоны</h3>
     </div>
     <div class="col-md-3" style="padding-top: 16px;">
         <label for="category_id">Выбрать категорию</label>
@@ -21,7 +21,7 @@ use app\models\Category;
             <?php foreach($categories as $row):?>
 
                 <option value="<?php echo Url::toRoute(['atribute/viewt','id'=> $row ->id])?>"
-                    <?php  if ($id != '-211'): ?> <!--если не "показать всё"-->
+                    <?php  if ($id != '-211'): ?>
 
                         <?php if ($id == $row ->id)
                           {echo ' selected';} ?>
@@ -34,7 +34,6 @@ use app\models\Category;
             <?php endforeach;?>
 
         </select>
-    </div>
     </div>
     <div class="col-md-1"></div>
 </div>

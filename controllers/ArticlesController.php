@@ -89,7 +89,40 @@ class ArticlesController extends \yii\web\Controller
 
             ]);
     }
-    
+
+   /*------------------------ SortCategory -----------------------------*/
+    public function actionViewt($id)
+    {
+        $categories = Category::find() ->all();
+
+        if ($id == '-211'){ //211 - признак, показать всё;
+            $articles = Articles::find()->all();
+
+            $dataProvider = new ActiveDataProvider([
+                'query' => Articles::find(),
+                'pagination' => [
+                    'pageSize' => 20,
+                ],
+            ]);
+        } else {
+
+            $articles = Articles::find() -> where(['category_id' => $id])->all();
+            $dataProvider = new ActiveDataProvider([
+                'query' => Articles::find() -> where(['category_id' => $id]),
+                'pagination' => [
+                    'pageSize' => 20,
+                ],
+            ]);
+        }
+
+        return $this->render('view',
+            [
+                'dataProvider' => $dataProvider,
+                'categories' => $categories,
+                'id' => $id,
+            ]);
+    }
+
   
    /*-------------------------------------------------------------*/
     public function actionDelete($id){

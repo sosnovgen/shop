@@ -7,9 +7,36 @@ use yii\helpers\StringHelper;
 
 ?>
 <button type="button" class="close" onclick="history.back();">&times;</button>
-    <div class="row capture">
-        <h3 class="text-center">Товары</h3>
+
+<div class="row capture">
+    <div class="col-md-8" >
+        <h3 class="text-center" style="padding-top:12px;">Товары</h3>
     </div>
+    <div class="col-md-3" style="padding-top: 16px;">
+        <label for="category_id">Выбрать категорию</label>
+        <select onchange="window.location.href=this.options[this.selectedIndex].value" name="category_id" class="form-control" id="select_cat">
+            <option value="<?php echo Url::toRoute(['articles/viewt','id' => '-211']); ?>"  >Все</option>
+
+            <?php foreach($categories as $row):?>
+
+                <option value="<?php echo Url::toRoute(['articles/viewt','id'=> $row ->id])?>"
+                    <?php  if ($id != '-211'): ?>
+
+                        <?php if ($id == $row ->id)
+                        {echo ' selected';} ?>
+
+                    <?php endif ?>
+                ><?php echo $row ->title ?>
+
+                </option>
+
+            <?php endforeach;?>
+
+        </select>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+<br>
 
 <div class="table-responsive">
 
