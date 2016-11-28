@@ -61,6 +61,8 @@ class ArticlesController extends \yii\web\Controller
                 [
                     'model' => $model,
                     'dataProvider' => $dataProvider,
+                    'categories' => $plans,
+                    'id' => '-211', //показать всё.
                 ]);
         }
         else {
@@ -74,7 +76,7 @@ class ArticlesController extends \yii\web\Controller
                 ]);
         }
     }
-    
+
    /*-----------------------------------------------------------*/
     public function actionView()
     {
@@ -122,8 +124,8 @@ class ArticlesController extends \yii\web\Controller
                 'id' => $id,
             ]);
     }
+    
 
-  
    /*-------------------------------------------------------------*/
     public function actionDelete($id){
 
@@ -135,10 +137,19 @@ class ArticlesController extends \yii\web\Controller
         {
             unlink($fileName);
         }
-
         $model -> delete();
-        return $this->redirect('view');
+
+        return  $this->redirect(['articles/viewt', 'id' => '-211']);
+
     }
+
+
+    public function actionIndex()
+    {
+
+        return  $this->redirect(['articles/viewt', 'id' => '-211']); //показать всё
+    }
+
     
    /*--------------------------------------------------*/
     protected function findModel($id)
@@ -189,17 +200,29 @@ class ArticlesController extends \yii\web\Controller
 
             $model->save();
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['viewt', 'id' => '-211']); //показать всё
+
         } else {
             return $this->render('create',
                 [
                 'model' => $model,
-                    'list' => $list,
-                    'param' => $param,
+                'list' => $list,
+                'param' => $param,
 
             ]);
         }
     }
 
+    /*--------------------------------------------------*/
+    public function actionModal($id)
+    {
+        $this->layout = false;
+
+        $model = Articles::findOne($id);
+        $body = $model ->body;
+        
+        return $this->render('modal', ['body' => $body]);
+
+    }
 
 }

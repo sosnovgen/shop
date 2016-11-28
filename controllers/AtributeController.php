@@ -16,23 +16,27 @@ class AtributeController extends \yii\web\Controller
 {
     public $layout = 'admin';
 
-    public function actionCreate($id)
+    public function actionCreate($id) // id товара. 
     {
         $model = new Atribute();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $model -> articles_id = $id; //id товара.
-            $article = Articles::findOne($id);
+            $article = Articles::findOne($id); //сам товар.
             $model -> category_id = $article -> category_id; //id категории.
             $model->save();
 
             $dataProvider = new ActiveDataProvider([
                 'query' => Atribute::find() -> where(['articles_id' => $id]),
                 'pagination' => [
-                    'pageSize' => 20,
+                    'pageSize' => 12,
                 ],
             ]);
 
-            return $this->render('view', ['model' => $model, 'dataProvider' => $dataProvider,]);
+            return $this->render('view', [
+                'model' => $model,
+                'dataProvider' => $dataProvider,
+                'id' => $id,
+            ]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -52,7 +56,7 @@ class AtributeController extends \yii\web\Controller
            $dataProvider = new ActiveDataProvider([
                 'query' => $attr,
                 'pagination' => [
-                    'pageSize' => 20,
+                    'pageSize' => 12,
                 ],
             ]);
             return $this->render('view', 
@@ -72,7 +76,7 @@ class AtributeController extends \yii\web\Controller
             $dataProvider = new ActiveDataProvider([
                 'query' => Atribute::find(),
                 'pagination' => [
-                    'pageSize' => 20,
+                    'pageSize' => 12,
                 ],
             ]);
             return $this->render('viewf', ['dataProvider' => $dataProvider,]);
@@ -89,7 +93,7 @@ class AtributeController extends \yii\web\Controller
             $dataProvider = new ActiveDataProvider([
                 'query' => Atribute::find() -> where(['articles_id' => '-377']),
                 'pagination' => [
-                    'pageSize' => 20,
+                    'pageSize' => 12,
                 ],
             ]);
         } else {
@@ -100,7 +104,7 @@ class AtributeController extends \yii\web\Controller
                 'query' => Atribute::find() -> where(['articles_id' => '-377'])
                            ->andWhere(['category_id' => $id]),
                 'pagination' => [
-                    'pageSize' => 20,
+                    'pageSize' => 12,
                 ],
             ]);
         }
@@ -152,28 +156,32 @@ class AtributeController extends \yii\web\Controller
         }
     }
 
-    public function actionAdd()
-    {
-        return $this->redirect('create');
-    }
-
     /*-----------------------------------------------------------*/
-    public function actionTample($id)
+    public function actionTample($id) //в id - код товара.
     {
-        $attrs = Atribute::find() -> where(['articles_id' => $id]) -> all();
+        //Удаление старого шаблона.
+        $article = Articles::findOne($id); //получить этот товар.
+        //удалить записи по условию: код товара "-377" и текущую категорию
+        Atribute::deleteAll(['articles_id' => '-377', 'category_id' => $article -> category_id ]);
 
+        //Сохранение нового шаблона.
+        $attrs = Atribute::find() -> where(['articles_id' => $id]) -> all();
         foreach ($attrs as $row)
         {
             $model = new Atribute();
 
-            $model -> articles_id = '-377'; //id товара - признак шаблона.
-            $model -> category_id = $row -> category_id;
-            $model -> key = $row -> key;
-            $model -> value = $row -> value;
+            $model->articles_id = '-377'; //id товара - признак шаблона.
+            $model->category_id = $row->category_id;
+            $model->key = $row->key;
+            $model->value = $row->value;
             $model->save();
         }
+        Yii::$app->session->setFlash('success', 'Шаблон сохранён!');
 
         return $this->redirect(['view', 'id' => $id]); //id товара.
 
     }
+
+ 
+
 }

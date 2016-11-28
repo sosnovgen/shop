@@ -18,13 +18,13 @@ use yii\widgets\ActiveForm;
     <br>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <?= $form->field($model, 'key')->textInput()->label('Свойство'); ?>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
             <?= $form->field($model, 'value')->textInput()->label('Значение'); ?>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
 
         </div>
         

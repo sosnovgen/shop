@@ -42,7 +42,7 @@ class Articles extends \yii\db\ActiveRecord
             [['category_id', 'attr_id'], 'integer'],
             [['cena'], 'number'],
             [['created_at'], 'safe'],
-            [['title', 'preview', 'group_id'], 'string', 'max' => 48],
+            [['title', 'preview', 'group_id'], 'string', 'max' => 128],
             [['meta_description', 'meta_keywords'], 'string', 'max' => 255],
         ];
     }

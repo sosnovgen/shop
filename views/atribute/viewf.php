@@ -21,8 +21,22 @@ use app\models\Category;
         'columns' => [
             /*['class' => 'yii\grid\SerialColumn'],*/
             'id:text:id',
-            'articles.title:text:Товар',
+            /*'articles.title:text:Товар',*/
             'category.title:text:Категория',
+
+            [
+                'label' => 'Товар',
+                'attribute' => 'articles_id',
+                'value' => function ($model){
+                    if($model-> articles_id =='-377'){
+                        return 'Шаблон';
+                    }
+                    else{
+                        return $model-> articles -> title;
+                    }
+                },
+            ],
+
             'key:text:key',
             'value:text:value',
 

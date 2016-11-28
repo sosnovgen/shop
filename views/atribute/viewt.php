@@ -47,8 +47,8 @@ use app\models\Category;
             /*['class' => 'yii\grid\SerialColumn'],*/
             'id:text:id',
             'category.title:text:Категория',
-            'key:text:key',
-            'value:text:value',
+            'key:text:Свойство',
+            'value:text:Значение',
 
             [
                 'label' => 'Создано',
@@ -57,7 +57,7 @@ use app\models\Category;
                 'options' => ['width' => '80'],
             ],
 
-            [
+           /* [
                 'class' => 'yii\grid\ActionColumn',
                 'header'=>'Действия',
                 'headerOptions' => ['width' => '60'],
@@ -73,7 +73,7 @@ use app\models\Category;
                         ]);
                     }
                 ]
-            ],
+            ],*/
 
         ],
         // ...

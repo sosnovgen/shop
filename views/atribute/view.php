@@ -19,6 +19,12 @@ use app\models\Category;
         <div class="col-md-1"></div>
     </div>
 
+
+<?php if (Yii::$app ->session ->hasFlash('success')){echo '<div class="alert alert-info fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>' . Yii::$app ->session ->getFlash('success') .'</strong></div>';}
+?>
+
 <div class="table-responsive">
 
 <?php

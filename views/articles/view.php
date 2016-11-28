@@ -4,6 +4,7 @@ use \yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\StringHelper;
+use yii\bootstrap\Modal;
 
 ?>
 <button type="button" class="close" onclick="history.back();">&times;</button>
@@ -36,11 +37,13 @@ use yii\helpers\StringHelper;
     </div>
     <div class="col-md-1"></div>
 </div>
+
 <br>
 
 <div class="table-responsive">
 
 <?php
+$param = '2087';
 echo GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' => [
@@ -62,14 +65,25 @@ echo GridView::widget([
         'category.title:text:Категория',
          'group_id:text:Группа',
         
-        [
+/*        [
             'label' => 'Описание',
             'attribute' => 'body',
             'value' => function ($data) {
                 return StringHelper::truncate($data->body, 100);
             }
+        ],*/
+
+        [
+            'label' => 'Описание',
+            'format' => 'raw',
+            'value' => function($data){
+                return  Html::a(Yii::t('app', ' {modelClass}', [
+                    'modelClass' => 'Подробно',
+                ]), ['articles/modal','id'=>$data->id], ['class' => 'btn btn-default popupModal' ]);
+            }
         ],
-        
+
+
         'cena:text:цена',
         
         /*'created_at:date:Создано',*/
@@ -81,8 +95,6 @@ echo GridView::widget([
         ],
 
         [
-
-
 
             'class' => 'yii\grid\ActionColumn',
             'header'=>'Действия',
@@ -115,4 +127,19 @@ echo GridView::widget([
 ]);
 
 ?>
+
+<?php
+Modal::begin([
+    'header' => '<i style="font-size: 1.2em;">Подробное описание</i>',
+    'id'=>'modal',
+    'class' =>'modal',
+    'size' => 'modal-md',
+]);
+
+
+
+Modal::end();
+
+?>
+
 </div>
