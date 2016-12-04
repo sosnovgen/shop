@@ -31,8 +31,8 @@ use app\models\Category;
 echo GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' => [
-        /*['class' => 'yii\grid\SerialColumn'],*/
-        'id:text:id',
+        ['class' => 'yii\grid\SerialColumn'],
+        /*'id:text:id',*/
         'articles.title:text:Товар',
         'category.title:text:Категория',
         'key:text:Свойство',

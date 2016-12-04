@@ -15,7 +15,8 @@ use yii\bootstrap\Modal;
     </div>
     <div class="col-md-3" style="padding-top: 16px;">
         <label for="category_id">Выбрать категорию</label>
-        <select onchange="window.location.href=this.options[this.selectedIndex].value" name="category_id" class="form-control" id="select_cat">
+        <select onchange="window.location.href=this.options[this.selectedIndex].value" name="category_id" class="form-control" id="select_cat" onfocus='this.size=16;'
+                onblur='this.size=1;' onchange='this.size=1; this.blur();' style="position: absolute">
             <option value="<?php echo Url::toRoute(['articles/viewt','id' => '-211']); ?>"  >Все</option>
 
             <?php foreach($categories as $row):?>
@@ -79,7 +80,7 @@ echo GridView::widget([
             'value' => function($data){
                 return  Html::a(Yii::t('app', ' {modelClass}', [
                     'modelClass' => 'Подробно',
-                ]), ['articles/modal','id'=>$data->id], ['class' => 'btn btn-default popupModal' ]);
+                ]), ['articles/modal','id'=>$data->id], ['class' => 'btn btn-default popupModal']);
             }
         ],
 
@@ -135,9 +136,6 @@ Modal::begin([
     'class' =>'modal',
     'size' => 'modal-md',
 ]);
-
-
-
 Modal::end();
 
 ?>

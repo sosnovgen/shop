@@ -6,7 +6,19 @@ use yii\widgets\ActiveForm;
 ?>
 
 <button type="button" class="close" onclick="history.back();">&times;</button>
+
 <div class="col-md-8">
+
+<?php if (Yii::$app ->session ->hasFlash('success'))
+            {echo '<div class="alert alert-info fade in" style="margin-top: 22px; ">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>' . Yii::$app ->session ->getFlash('success') .'</strong></div>';}
+      if (Yii::$app ->session ->hasFlash('warning'))
+            {echo '<div class="alert alert-warning fade in" style="margin-top: 22px; ">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>' . Yii::$app ->session ->getFlash('warning') .'</strong></div>';}
+
+?>
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -18,23 +30,25 @@ use yii\widgets\ActiveForm;
     <br>
 
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
             <?= $form->field($model, 'key')->textInput()->label('Свойство'); ?>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6">
             <?= $form->field($model, 'value')->textInput()->label('Значение'); ?>
         </div>
-        <div class="col-md-2">
 
-        </div>
-        
     </div>
-<br>
+<br><br>
+    <div class="row" style="margin-bottom: 12px; padding-left: 14px;">
         <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary load-bt']) ?>
+            <?= Html::a('Загрузить шаблон', ['atribute/load', 'id' => $id ], ['class'=>'btn btn-default load-bt']) ?>
+            
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>
+
 
 </div>
 
@@ -44,3 +58,5 @@ use yii\widgets\ActiveForm;
 
     </div>
 </div>
+
+

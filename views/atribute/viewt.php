@@ -15,7 +15,8 @@ use app\models\Category;
     </div>
     <div class="col-md-3" style="padding-top: 16px;">
         <label for="category_id">Выбрать категорию</label>
-        <select onchange="window.location.href=this.options[this.selectedIndex].value" name="category_id" class="form-control" id="select_cat">
+        <select onchange="window.location.href=this.options[this.selectedIndex].value" name="category_id" class="form-control" id="select_cat"
+                onfocus='this.size=16;' onblur='this.size=1;' onchange='this.size=1; this.blur();' style="position: absolute">
             <option value="<?php echo Url::toRoute(['atribute/viewt','id' => '-211']); ?>"  >Все</option>
 
             <?php foreach($categories as $row):?>
@@ -44,8 +45,8 @@ use app\models\Category;
     echo GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            /*['class' => 'yii\grid\SerialColumn'],*/
-            'id:text:id',
+            ['class' => 'yii\grid\SerialColumn'],
+            /*'id:text:id',*/
             'category.title:text:Категория',
             'key:text:Свойство',
             'value:text:Значение',

@@ -24,7 +24,7 @@ class CategoryController extends \yii\web\Controller
 
         $param = ['options' =>[ '' => ['Selected' => false]]];
 
-        $plans = Category::find() ->all();
+        $plans = Category::find() ->orderBy('title') ->all();
         foreach ($plans as $plan):
             $list[$plan ->id] = $plan ->title;
         endforeach;
@@ -56,7 +56,7 @@ class CategoryController extends \yii\web\Controller
             $dataProvider = new ActiveDataProvider([
                 'query' => Category::find(),
                 'pagination' => [
-                    'pageSize' => 20,
+                    'pageSize' => 14,
                 ],
             ]);
 
@@ -76,7 +76,7 @@ class CategoryController extends \yii\web\Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Category::find(),
             'pagination' => [
-                'pageSize' => 20,
+                'pageSize' => 14,
             ],
         ]);
 
@@ -161,7 +161,7 @@ class CategoryController extends \yii\web\Controller
     public function actionTree()
     {
         //Выбираем данные из БД
-        $result = Category::find() ->all();
+        $result = Category::find() ->orderBy('title')->all();
 
         if  (count($result) > 0){
 
@@ -181,5 +181,33 @@ class CategoryController extends \yii\web\Controller
             ]);
     }
 
+    /*-----------------------------------------------------------*/
+    public function actionTreecats()
+    {
+    //Выбираем данные из БД
+    $result = Category::find() ->orderBy('title')->all();
+
+    if  (count($result) > 0){
+
+        $cats = array(); //создать новый     массив
+        //заполнить:
+        foreach($result as $cat) {
+            $cats_ID[$cat['id']][] = $cat;
+            $cats[$cat['parent_id']][$cat['id']] =  $cat;
+        }
+    }
+
+    return $this->render('treecats',
+
+        ['cats' => $cats, ]);
+    }
+
+    /*-----------------------------------------------------------*/
+    public function actionSelect($id)
+    {
+
+
+        return $this->render ('test', ['attr' => $id]);
+    }
 
 }

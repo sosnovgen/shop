@@ -40,7 +40,7 @@ class AtributeController extends \yii\web\Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
-
+                'id' => $id,
             ]);
         }
     }
@@ -85,7 +85,8 @@ class AtributeController extends \yii\web\Controller
     /*-------------------------- template ---------------------------------*/
     public function actionViewt($id)
     {
-        $categories = Category::find() ->all();
+
+        $categories = Category::find() ->orderBy('title')->all();
         
         if ($id == '-211'){ //211 - признак, показать всё; 377 - признак шаблона.
             $atribute = Atribute::find() -> where(['articles_id' => '-377'])->all();
@@ -181,7 +182,36 @@ class AtributeController extends \yii\web\Controller
         return $this->redirect(['view', 'id' => $id]); //id товара.
 
     }
+    /*-----------------------------------------------------------*/
+    public function actionLoad($id) //в id - код товара.
+    {
+        //Удалить все атрибуты.
+        $article = Articles::findOne($id); //получить этот товар.
+        //удалить записи по условию: код товара и текущую категорию
+        Atribute::deleteAll(['articles_id' =>$id, 'category_id' => $article -> category_id ]);
 
- 
+        //Загрузить новый шаблон.
+        $attrs = Atribute::find() -> where(['category_id' => $article -> category_id])
+                                  -> andWhere(['articles_id' => '-377'])-> all();
+
+        foreach ($attrs as $row) //сохранить в БД с id товара.
+        {
+            $model = new Atribute();
+
+            $model->articles_id = $id; //id товара
+            $model->category_id = $row->category_id;
+            $model->key = $row->key;
+            $model->value = $row->value;
+            $model->save();
+        }
+        /*return $this->render ('test',['attr' => $attrs]);*/
+
+        if (count($attrs)>0)
+        { Yii::$app->session->setFlash('success', 'Шаблон загружен!'); }
+        else
+        {Yii::$app->session->setFlash('warning', 'Шаблон не найден!'); }
+
+        return $this->redirect(['view', 'id' => $id]); //id товара.
+    }
 
 }

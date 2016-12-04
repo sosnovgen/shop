@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 ?>
 
 <button type="button" class="close" onclick="history.back();">&times;</button>
-<div class="col-md-8">
+<div class="col-md-9">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -42,7 +42,7 @@ use yii\widgets\ActiveForm;
 
 </div>
 
-<div class="col-md-4">
+<div class="col-md-3">
     <div class="description small">
         <p>* Здесь можно добавить/отредактировать категорию товара.</p>
          <p>* Размер картинки примерно 300Х300.</p>

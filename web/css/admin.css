@@ -1,7 +1,12 @@
 /*------------- admin  ----------------*/
 .description{
     flex: 1;
-    margin: 22px 14px 22px 14px;
+    margin: 22px 14px 42px 14px;
     padding: 0 10px;
     border-left: 4px solid #bcdeff;
+}
+.load-bt{
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }

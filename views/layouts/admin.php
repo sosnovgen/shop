@@ -75,7 +75,7 @@ AppAsset::register($this);  // $this represents the view object
                                 <a href="<?php echo Url::toRoute('category/view')?>"> Показать все</a>
                             </li>
                             <li>
-                                <a href="<?php echo Url::toRoute('category/tree')?>"> Дерево</a>
+                                <a href="<?php echo Url::toRoute('category/treecats')?>"> Дерево</a>
                             </li>
                             <li>
                                 <a href="<?php echo Url::toRoute('category/create')?>"> Добавить новую</a>

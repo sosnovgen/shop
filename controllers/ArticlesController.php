@@ -26,10 +26,18 @@ class ArticlesController extends \yii\web\Controller
 
         $param = ['options' =>[ '' => ['Selected' => false]]];
 
-        $plans = Category::find() ->all();
+        $plans = Category::find() ->orderBy('title')->all();
         foreach ($plans as $plan):
             $list[$plan ->id] = $plan ->title ;
         endforeach;
+
+        //Create the tree catagory
+        $cats = array(); //new array
+
+        foreach($plans as $cat) {   //feel it:
+             $cats_ID[$cat['id']][] = $cat;
+             $cats[$cat['parent_id']][$cat['id']] =  $cat;
+          }
 
         $model = new Articles();
         if ($model->load(Yii::$app->request->post()) && $model->validate())  {
@@ -72,7 +80,7 @@ class ArticlesController extends \yii\web\Controller
                     'model' => $model,
                     'list' => $list,
                     'param' => $param,
-
+                    'cats' => $cats,
                 ]);
         }
     }
@@ -95,7 +103,7 @@ class ArticlesController extends \yii\web\Controller
    /*------------------------ SortCategory -----------------------------*/
     public function actionViewt($id)
     {
-        $categories = Category::find() ->all();
+        $categories = Category::find() ->orderBy('title')->all();
 
         if ($id == '-211'){ //211 - признак, показать всё;
             $articles = Articles::find()->all();
@@ -174,6 +182,12 @@ class ArticlesController extends \yii\web\Controller
             $list[$plan ->id] = $plan ->title ;
         endforeach;
 
+        //Create the tree catagory
+        $cats = array(); //new array
+        foreach($plans as $cat) {   //feel it:
+            $cats_ID[$cat['id']][] = $cat;
+            $cats[$cat['parent_id']][$cat['id']] =  $cat;
+        }
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
             $fileName = UploadedFile::getInstance($model, 'preview');
@@ -192,12 +206,10 @@ class ArticlesController extends \yii\web\Controller
                 $img = Image::make($img_root . $fileName);
                 $img->resize(300, 300);
                 $img->save($img_root . $fileName);
-
             }
             else{
                 $model->preview = $oldFileName;
             }
-
             $model->save();
 
             return $this->redirect(['viewt', 'id' => '-211']); //показать всё
@@ -208,7 +220,7 @@ class ArticlesController extends \yii\web\Controller
                 'model' => $model,
                 'list' => $list,
                 'param' => $param,
-
+                'cats' => $cats,
             ]);
         }
     }
