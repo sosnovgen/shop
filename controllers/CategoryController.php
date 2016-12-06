@@ -90,7 +90,7 @@ class CategoryController extends \yii\web\Controller
         $model = $this->findModel($id);
         $oldFileName = $model->preview;
 
-        $param = ['options' =>[ $model ->id => ['Selected' => true]]];
+        $param = ['options' =>[ $model ->parent_id => ['Selected' => true]]];
 
         $plans = Category::find() ->all();
         foreach ($plans as $plan):

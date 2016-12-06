@@ -132,7 +132,7 @@ class AtributeController extends \yii\web\Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
-
+                'id' => $model->articles_id,
             ]);
         }
     }

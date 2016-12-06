@@ -15,17 +15,17 @@ function build_tree($cats,$parent_id,$only_parent = false){
         $tree = '<ul>';
         if($only_parent==false){
             foreach($cats[$parent_id] as $cat){
-                /*$st = Url::toRoute(['articles/entercat', 'id' => $cat['id']]);
-                $tree .= '<li><a href="'.$st.'">'.$cat['title'];*/
-                $tree .= '<li><a href="'.$cat['id'].'" class="trees">'.$cat['title'];
+                $st = Url::toRoute(['category/update', 'id' => $cat['id']]);
+                $tree .= '<li><a href="'.$st.'">'.$cat['title'];
+                /*$tree .= '<li><a href="'.$cat['id'].'" class="trees">'.$cat['title'];*/
                 $tree .=  build_tree($cats,$cat['id']);
                 $tree .= '</a></li>';
             }
         }elseif(is_numeric($only_parent)){
             $cat = $cats[$parent_id][$only_parent];
-            /*$st = Url::toRoute(['articles/entercat', 'id' => $cat['id']]);
-            $tree .= '<li><a href="'.$st.'">'.$cat['title'];*/
-            $tree .= '<li><a href="'.$cat['id'].'" class="trees">'.$cat['title'];
+            $st = Url::toRoute(['category/update', 'id' => $cat['id']]);
+            $tree .= '<li><a href="'.$st.'">'.$cat['title'];
+            /*$tree .= '<li><a href="'.$cat['id'].'" class="trees">'.$cat['title'];*/
             $tree .=  build_tree($cats,$cat['id']);
             $tree .= '</a></li>';
         }
@@ -34,9 +34,8 @@ function build_tree($cats,$parent_id,$only_parent = false){
     else return null;
     return $tree;
 }
-
-
-echo build_tree($cats,0);
 ?>
+<div class="bigtree"><?php echo build_tree($cats,0); ?></div>
+
 <br>
 
