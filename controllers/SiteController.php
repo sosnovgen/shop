@@ -11,9 +11,8 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
+    public $layout = 'site';
+    
     public function behaviors()
     {
         return [

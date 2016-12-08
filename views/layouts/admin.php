@@ -4,8 +4,6 @@ use yii\helpers\Url;
 use app\assets\AppAsset;
 AppAsset::register($this);  // $this represents the view object
 
-/* @var $this yii\web\View */
-/* @var $content string */
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
