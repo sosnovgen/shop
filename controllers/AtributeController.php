@@ -46,7 +46,7 @@ class AtributeController extends \yii\web\Controller
     }
 
     /*-----------------------------------------------------------*/
-    public function actionView($id)
+    public function actionView($id) //id - код товара.
     {
        $attr = Atribute::find() -> where(['articles_id' => $id]) ;
        $col = $attr -> count();

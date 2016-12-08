@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
+use app\models\Articles;
 ?>
 
 <button type="button" class="close" onclick="history.back();">&times;</button>
@@ -24,7 +25,7 @@ use yii\widgets\ActiveForm;
 
 
     <div class="row capture">
-        <h3>Атрибуты</h3>
+        <h3>Атрибут товара "<?php $article = Articles::findOne($id); echo $article ->title ?>"</h3>
     </div>
 
     <br>
@@ -55,7 +56,10 @@ use yii\widgets\ActiveForm;
 <div class="col-md-4">
     <div class="description small">
         <p>* Здесь можно добавить/отредактировать атрибуты товара (цвет, размер, вес, и т.п.).</p>
-
+        <p>* Атрибуты одной категории товаров схожи, поэтому можно использовать для их заполнения шаблон.</p>
+        <p>* Для каждой категории товаров можно создать один шаблон. Выбирается товар нужной категории, затем
+            переходим по кнопке "А" в столбце "Действие" в окно "Атрибуты товара" -> "Сохранить как шаблон".</p>
+        <p>* Затем можно заполнять атрибуты, загрузив их из шабона ("Загрузить шаблон") с последующим редактированием отдельных полей.</p>
     </div>
 </div>
 

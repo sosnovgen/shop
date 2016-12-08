@@ -5,13 +5,14 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\StringHelper;
 use app\models\Category;
+use app\models\Articles;
 
 ?>
 <button type="button" class="close" onclick="history.back();">&times;</button>
 
     <div class="row capture">
        <div class="col-md-8" >
-            <h3 class="text-center">Атрибуты</h3>
+            <h3 class="text-center">Атрибуты товара "<?php $article = Articles::findOne($id); echo $article ->title ?>"</h3>
        </div>
        <div class="col-md-3" style="padding-top: 16px;">
            <?= Html::a('Сохранить как шаблон', ['atribute/tample', 'id' => $id], ['class'=>'btn btn-default btn-block']) ?>
@@ -33,7 +34,7 @@ echo GridView::widget([
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
         /*'id:text:id',*/
-        'articles.title:text:Товар',
+        /*'articles.title:text:Товар',*/
         'category.title:text:Категория',
         'key:text:Свойство',
         'value:text:Значение',
