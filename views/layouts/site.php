@@ -1,12 +1,9 @@
 <?php
-
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-
-
 ?>
 
 <?php $this->beginPage() ?>
@@ -19,10 +16,36 @@ use yii\widgets\Breadcrumbs;
 
     <script type="text/javascript" src="<?php echo Url::home()?>js/jquery.min.js"></script>
     
-        <title>shop</title>
+    <!-- slider -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#slider-range" ).slider({
+                range: true,
+                min: 0,
+                max: 500,
+                values: [ 50, 300 ],
+                slide: function( event, ui ) {
+                    $( "#price_min" ).val(ui.values[ 0 ]);
+                    $( "#price_max" ).val(ui.values[ 1 ]);
+                    /*$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );*/
+                }
+            });
+
+            $("#price_min").val( $( "#slider-range" ).slider( "values", 0 ));
+            $("#price_max").val( $( "#slider-range" ).slider( "values", 1 ));
+
+            /*$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+             " - $" + $( "#slider-range" ).slider( "values", 1 ) );*/
+        } );
+    </script>
+    
+    <title>shop</title>
 
     <link href="<?php echo Url::home()?>css/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="<?php echo Url::home()?>css/form.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="<?php echo Url::home()?>css/site.css" rel="stylesheet" type="text/css" media="all" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 
     <script src="<?php echo Url::home()?>js/jquery.easydropdown.js"></script>
@@ -57,6 +80,8 @@ use yii\widgets\Breadcrumbs;
             });
         });
     </script>
+    
+    
     <!-- start menu -->
     <link href="<?php echo Url::home()?>css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
     <script type="text/javascript" src="<?php echo Url::home()?>js/megamenu.js"></script>

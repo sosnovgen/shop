@@ -9,11 +9,11 @@ use yii\bootstrap\Modal;
 
 ?>
 
-<h3></h3>
+<h3>Test</h3>
 <br>
 <?php
 
-echo '123';
+var_dump($filterkey);
 
 ?>
 

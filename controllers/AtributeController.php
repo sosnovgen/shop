@@ -95,6 +95,7 @@ class AtributeController extends \yii\web\Controller
                 'query' => Atribute::find() -> where(['articles_id' => '-377']),
                 'pagination' => [
                     'pageSize' => 12,
+
                 ],
             ]);
         } else {
@@ -106,6 +107,7 @@ class AtributeController extends \yii\web\Controller
                            ->andWhere(['category_id' => $id]),
                 'pagination' => [
                     'pageSize' => 12,
+                    
                 ],
             ]);
         }

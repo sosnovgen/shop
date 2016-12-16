@@ -61,17 +61,12 @@ class ArticlesController extends \yii\web\Controller
             $dataProvider = new ActiveDataProvider([
                 'query' => Articles::find(),
                 'pagination' => [
-                    'pageSize' => 20,
+                    'pageSize' => 14,
                 ],
             ]);
 
-            return $this->render('view',
-                [
-                    'model' => $model,
-                    'dataProvider' => $dataProvider,
-                    'categories' => $plans,
-                    'id' => '-211', //показать всё.
-                ]);
+            return $this->redirect(['viewt','id' => $model->category_id ]); //показать всё.
+
         }
         else {
             // либо страница отображается первый раз, либо есть ошибка в данных
@@ -101,7 +96,7 @@ class ArticlesController extends \yii\web\Controller
     }
 
    /*------------------------ SortCategory -----------------------------*/
-    public function actionViewt($id)
+    public function actionViewt($id) //id - индекс категории
     {
         $categories = Category::find() ->orderBy('title')->all();
 
@@ -111,16 +106,16 @@ class ArticlesController extends \yii\web\Controller
             $dataProvider = new ActiveDataProvider([
                 'query' => Articles::find(),
                 'pagination' => [
-                    'pageSize' => 20,
+                    'pageSize' => 14,
                 ],
             ]);
         } else {
 
-            $articles = Articles::find() -> where(['category_id' => $id])->all();
+            /*$articles = Articles::find() -> where(['category_id' => $id])->all();*/
             $dataProvider = new ActiveDataProvider([
                 'query' => Articles::find() -> where(['category_id' => $id]),
                 'pagination' => [
-                    'pageSize' => 20,
+                    'pageSize' => 14,
                 ],
             ]);
         }

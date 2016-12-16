@@ -8,6 +8,29 @@ use yii\helpers\Url;
         <div class="rsidebar span_1_of_left">
 
             <section  class="sky-form">
+                <h4>Price</h4>
+                <div class="row row1 scroll-pane"  style="height: 160px;">
+                    <div class="col col-4">
+                        <div class="filter_price">
+                            <label class="range_title">Диапазон цены:</label>
+                        </div>
+
+                        <div class="price-input">
+                            <div class="price-input-i">
+                                <input class="input-text" id="price_min" name="price_min" value="" type="text">
+                                    -&nbsp;
+                            </div>
+                            <div class="price-input-i">
+                                <input class="input-text" id="price_max" name="price_max" value="" type="text">
+                                    &nbsp;грн
+                            </div>
+				        </div>
+
+                        <div id="slider-range" style="margin: 50px 40px 0px 0px"></div>
+
+                    </div>
+                </div>
+
                 <h4>Occasion</h4>
                 <div class="row row1 scroll-pane">
                     <div class="col col-4">
@@ -109,3 +132,4 @@ use yii\helpers\Url;
         <div class="clear"></div>
     </div>
 </div>
+

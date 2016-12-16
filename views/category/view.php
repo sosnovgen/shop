@@ -70,8 +70,17 @@ echo GridView::widget([
             'class' => 'yii\grid\ActionColumn',
             'header'=>'Действия',
             'headerOptions' => ['width' => '60'],
-            'template' => '{update} {delete}{link}',
+            'template' => '{add} {update} {delete}{link}',
             'buttons' => [
+                'add' => function($url, $model){
+                    return Html::a('<span class="glyphicon glyphicon-filter"></span>', ['filter/view','id'=> $model->id],  [
+                        'class' => '',
+                        'data' => [
+                            'method' => 'post',
+                        ],
+                    ]);
+                },
+
                 'delete' => function($url, $model){
                     return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->id], [
                         'class' => '',

@@ -22,10 +22,9 @@ use app\models\Articles;
 ?>
 
     <?php $form = ActiveForm::begin(); ?>
-
-
-    <div class="row capture">
-        <h3>Атрибут товара "<?php $article = Articles::findOne($id); echo $article ->title ?>"</h3>
+<br>
+    <div class="row">
+        <span style="font-size: 1.2em"; >Атрибут товара "<?php $article = Articles::findOne($id); echo $article ->title." (id=". $article ->id.")" ?>"</span>
     </div>
 
     <br>

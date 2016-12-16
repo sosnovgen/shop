@@ -60,7 +60,7 @@ class CategoryController extends \yii\web\Controller
                 ],
             ]);
 
-            return $this->render('view', ['model' => $model, 'dataProvider' => $dataProvider,]);
+            return $this->redirect(['view']);
         } else {
             return $this->render('create', [
                 'model' => $model,

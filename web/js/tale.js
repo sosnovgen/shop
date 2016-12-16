@@ -17,5 +17,16 @@ $(document).ready(function(){
         /*alert(cat);*/
         $('#treeModal').modal('hide');
     });
+
+ /*   /!*-------------  filter  ---------------*!/
+    //отследить изменения первого элемента DropDown
+    $('select').eq( 0 ).change(function(event) {
+        event.preventDefault();
+
+        var url='test?id='+$(this).val(); //в контроллер
+        /!*alert(url);*!/
+        location.href = url;
+    });*/
+
 });
 

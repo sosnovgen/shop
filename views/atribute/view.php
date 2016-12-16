@@ -8,11 +8,12 @@ use app\models\Category;
 use app\models\Articles;
 
 ?>
-<button type="button" class="close" onclick="history.back();">&times;</button>
 
-    <div class="row capture">
+<button type="button" class="close" onclick="history.back();">&times;</button>
+<br>
+    <div class="row">
        <div class="col-md-8" >
-            <h3 class="text-center">Атрибуты товара "<?php $article = Articles::findOne($id); echo $article ->title ?>"</h3>
+           <span style="font-size: 1.2em";  >Атрибут товара "<?php $article = Articles::findOne($id); echo $article ->title." (id=". $article ->id.")" ?>"</span>
        </div>
        <div class="col-md-3" style="padding-top: 16px;">
            <?= Html::a('Сохранить как шаблон', ['atribute/tample', 'id' => $id], ['class'=>'btn btn-default btn-block']) ?>

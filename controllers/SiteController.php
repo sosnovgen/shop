@@ -44,6 +44,7 @@ class SiteController extends Controller
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
+                'view' => '@app/views/site/my_error_404.php'
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',

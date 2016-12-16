@@ -103,13 +103,13 @@ AppAsset::register($this);  // $this represents the view object
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#lisp_4"><i class="fa fa-fw fa-male"></i> Студенты<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#lisp_4"><i class="fa fa-fw fa-filter"></i> Фильтр<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="lisp_4" class="collapse">
                             <li>
-                                <a href="<?php echo Url::toRoute('order/view')?>"> Показать всех</a>
+                                <a href="<?php echo Url::toRoute(['filter/view', 'id' => '-411'])?>"> Показать все</a>
                             </li>
                             <li>
-                                <a href="<?php echo Url::toRoute('order/create')?>"> Редактировать</a>
+                                <a href="<?php echo Url::toRoute('filter/create')?>"> Создать новый</a>
                             </li>
                         </ul>
                     </li>
