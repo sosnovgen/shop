@@ -20,6 +20,8 @@ AppAsset::register($this);  // $this represents the view object
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
 
+        <script type="text/javascript" src="<?php echo Url::home()?>js/jquery.min.js"></script>
+        <script src="<?php echo Url::home()?>js/tale.js"></script>
         <script src="<?php echo Url::home()?>tinymce/tinymce.min.js"></script>
         <script>
             tinymce.init({

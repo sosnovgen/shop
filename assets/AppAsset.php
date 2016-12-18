@@ -24,7 +24,7 @@ class AppAsset extends AssetBundle
         
     ];
     public $js = [
-        'js/tale.js',
+        
         'js/bootstrap-filestyle.min.js',
     ];
 

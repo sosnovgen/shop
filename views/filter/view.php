@@ -17,7 +17,7 @@ use app\models\Articles;
     <div class="col-md-3 capture" style="padding-top: 16px;">
         <label for="category_id">Выбрать категорию</label>
         <select onchange="window.location.href=this.options[this.selectedIndex].value" name="category_id" class="form-control" id="select_cat" onfocus='this.size=16;'
-                onblur='this.size=1;' onchange='this.size=1; this.blur();' style="position: absolute">
+                 onchange='this.size=1; this.blur();' style="position: absolute">
             <option value="<?php echo Url::toRoute(['filter/view','id' => '-411']); ?>"  >Все</option>
 
             <?php foreach($categories as $row):?>
@@ -54,6 +54,42 @@ use app\models\Articles;
             'key:text:Свойство',
             /*'value:text:Значение',*/
 
+            [
+                'label' => 'Тип',
+                'attribute' => 'priznak',
+                'value' => function ($model, $id, $index, $column) {
+                    return Html::activeDropDownList($model, 'priznak',
+                        Array(
+                            '0'=>'Перечень',
+                            '1'=>'Диапазон',
+                            '2'=>'Больше'),
+                        [
+                            'class' => 'drop',
+                            'Selected' => $model->priznak,
+                            'data-c' => $model->id,
+                            'data-d' => $model->category_id,
+                            
+                        ]
+
+                    );
+                },
+                'format' => 'raw',
+                'filter' => Array('0'=>'Перечень', '1'=>'Диапазон', '2'=>'Больше'),
+            ],
+
+            [
+                'label' => 'Вкл.',
+                'attribute' => 'enable',
+                'format' => 'raw',
+                'value' => function ($model, $index, $widget) {
+                return Html::checkbox('hide[]', $model->enable,
+                    [
+                        'class' => 'check',
+                        'data-c' => $model->id,
+                        'data-d' => $model->category_id,
+                    ]);
+                },
+            ],
             /*[
                 'label' => 'Создано',
                 'attribute' => 'created_at',

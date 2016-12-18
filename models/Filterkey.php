@@ -37,7 +37,8 @@ class Filterkey extends \yii\db\ActiveRecord
             [['category_id'], 'integer'],
             [['created_at'], 'safe'],
             ['enable','default', 'value' => '0'],
-            [['key', 'priznak'], 'string', 'max' => 36],
+            ['priznak','default', 'value' => '0'],
+            [['key'], 'string', 'max' => 36],
         ];
     }
 

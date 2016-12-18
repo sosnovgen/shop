@@ -190,6 +190,7 @@ class FilterController extends Controller
         }
     }
 
+ /*------------------------------------------------------------------------------*/
     public function actionTest($id)
     {
         $keys = Atribute::find() -> where(['category_id' => $id])
@@ -211,4 +212,32 @@ class FilterController extends Controller
             ]);
         
     }
+
+/*--------------------------------------------------------------*/
+    public function actionCheck($id, $id2)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->enable) {$model->enable = 0;}
+         else {$model->enable = 1;}
+
+        $model->save();
+        
+        return $this->redirect(['view','id' => $id2,]);
+        
+    }
+
+    /*--------------------------------------------------------------*/
+    public function actionType($id, $id2, $id3) //id - filterkey, id2 - category, id3 - priznak.
+    {
+        $model = $this->findModel($id);
+        $model ->priznak = $id3;
+        $model->save();
+
+        return $this->redirect(['view','id' => $id2,]);
+
+    }
+    
+    
+    
 }
