@@ -6,6 +6,7 @@ use app\models\Atribute;
 use Yii;
 use app\models\Filterkey;
 use app\models\FilterkeySearch;
+use app\models\Filtervalue;
 use yii\web\Controller;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
@@ -237,7 +238,18 @@ class FilterController extends Controller
         return $this->redirect(['view','id' => $id2,]);
 
     }
-    
-    
+
+    /*--------------------------------------------------*/
+    public function actionModal($id)
+    {
+        $this->layout = false;
+
+        $model = Filtervalue::find() ->select(['value'])
+            ->where(['filterkey_id' => $id])->all();
+
+
+        return $this->render('modal', ['body' => $model]);
+
+    }    
     
 }

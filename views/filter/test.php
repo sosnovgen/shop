@@ -13,7 +13,7 @@ use yii\bootstrap\Modal;
 <br>
 <?php
 
-var_dump($filterkey);
+var_dump($body);
 
 ?>
 

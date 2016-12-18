@@ -15,7 +15,7 @@ use yii\db\Expression;
  * @property string $priznak
  * @property string $created_at
  */
-class Filterkey extends \yii\db\ActiveRecord
+class Filtervalue extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc

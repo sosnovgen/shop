@@ -67,7 +67,13 @@ $(document).ready(function(){
 
     });
 
+    /*-------------  modal2 (filter)  ---------------*/
+    $('.popupModal2').click(function(e) {
+        e.preventDefault();
 
+        $('#modal2').modal('show').find('.modal-body')
+            .load($(this).attr('href'));
+    });
 
 
 });

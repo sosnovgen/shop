@@ -6,6 +6,7 @@ use yii\helpers\Url;
 use yii\helpers\StringHelper;
 use app\models\Category;
 use app\models\Articles;
+use yii\bootstrap\Modal;
 
 ?>
 <button type="button" class="close" onclick="history.back();">&times;</button>
@@ -53,7 +54,16 @@ use app\models\Articles;
             'category.title:text:Категория',
             'key:text:Свойство',
             /*'value:text:Значение',*/
-
+            [
+                'label' => 'Параметры',
+                'format' => 'raw',
+                'value' => function($data){
+                    return  Html::a(Yii::t('app', ' {modelClass}', [
+                        'modelClass' => 'Список',
+                    ]), ['filter/modal','id'=>$data->id], ['class' => 'btn btn-default popupModal2']);
+                }
+            ],            
+            
             [
                 'label' => 'Тип',
                 'attribute' => 'priznak',
@@ -103,6 +113,17 @@ use app\models\Articles;
         // ...
 
     ]);
-
     ?>
+ <?php
+    Modal::begin([
+        'header' => '<i style="font-size: 1.2em;">Список папраметров</i>',
+        'id'=>'modal2',
+        'class' =>'modal',
+        'size' => 'modal-md',
+    ]);
+    
+    Modal::end();
+
+ ?>
+
 </div>
