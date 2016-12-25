@@ -8,6 +8,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Filterkey;
+
 
 class SiteController extends Controller
 {
@@ -122,4 +124,27 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+/*-----------------  list articles  --------------------------*/
+    public function actionArticles($id) //id - category.
+    {
+        $filter = Filterkey::find()
+                    ->where(['category_id' => $id])
+                    ->andWhere(['enable' => true])->all();
+
+        return $this->render('articles', ['filter' => $filter]);
+    }
+
+    /*-----------------  Test  --------------------------*/
+    public function actionTest($id)
+    {
+        $filter = Filterkey::find()
+            ->where(['category_id' => $id])
+            ->andWhere(['enable' => true])->all();
+
+        return $this->render('test', ['filter' => $filter]);
+        
+    }
+    
+    
 }

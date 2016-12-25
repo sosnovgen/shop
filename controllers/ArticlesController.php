@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Category;
 use Yii;
 use app\models\Articles;
+use app\models\Atribute;
 use app\models\ArticlesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -141,6 +142,9 @@ class ArticlesController extends \yii\web\Controller
             unlink($fileName);
         }
         $model -> delete();
+
+        //Удалить атрибуты этого товара.
+        Atribute::deleteAll(['articles_id' => $id]);
 
         return  $this->redirect(['articles/viewt', 'id' => '-211']);
 

@@ -24,4 +24,11 @@
     padding: 0.33333em;
     resize: none;
 }
+
+.bigtree2 li{
+    display: list-item;
+    padding-left:42px;
+
+}
+
 /*---------------- 404 --------------------*/

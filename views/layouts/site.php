@@ -4,6 +4,7 @@ use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
+use app\models\Category;
 ?>
 
 <?php $this->beginPage() ?>
@@ -42,7 +43,7 @@ use yii\widgets\Breadcrumbs;
     </script>
     
     <title>shop</title>
-
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo Url::home()?>css/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="<?php echo Url::home()?>css/form.css" rel="stylesheet" type="text/css" media="all" />
     <link href="<?php echo Url::home()?>css/site.css" rel="stylesheet" type="text/css" media="all" />
@@ -132,15 +133,15 @@ use yii\widgets\Breadcrumbs;
         <!-- start header menu -->
         <ul class="megamenu skyblue">
             <li><a class="color1" href="#">Home</a></li>
-            <li class="grid"><a class="color2" href="#">Men</a>
+            <li class="grid"><a class="color2" href="#">Товары</a>
                 <div class="megapanel">
                     <div class="row">
                         <div class="col1">
                             <div class="h_nav">
-                                <h4>popular</h4>
+                                <h4>Популярные</h4>
                                 <ul>
-                                    <li><a href="shop.html">new arrivals</a></li>
-                                    <li><a href="shop.html">men</a></li>
+                                    <li><a href="<?php echo Url::toRoute(['site/articles', 'id' => '7'])?>">Фильтр</a></li>
+                                    <li><a href="<?php echo Url::toRoute(['site/test', 'id' => '7'])?>">Test</a></li>
                                     <li><a href="shop.html">women</a></li>
                                     <li><a href="shop.html">accessories</a></li>
                                     <li><a href="shop.html">kids</a></li>
@@ -175,10 +176,66 @@ use yii\widgets\Breadcrumbs;
                         <div class="col1"></div>
                         <div class="col1"></div>
                         <div class="col1"></div>
-                        <img src="images/images/nav_img.jpg" alt=""/>
+                        <img src="<?php echo Url::home()?>images/images/nav_img.jpg" alt=""/>
                     </div>
                 </div>
             </li>
+            <li class="grid"><a class="color2" href="#">Категория</a>
+                <div class="megapanel">
+                    <div class="row">
+                        <div class="col1" style="width:40%">
+                            <div class="h_nav">
+                                <h4 style="margin-bottom: 1%;">Разделы</h4>
+
+                      <?php
+
+                        $result = Category::find() ->orderBy('title')->all();
+
+                        if  (count($result) > 0){
+
+                            $cats = array(); //создать новый     массив
+                            //заполнить:
+                            foreach($result as $cat) {
+                                $cats_ID[$cat['id']][] = $cat;
+                                $cats[$cat['parent_id']][$cat['id']] =  $cat;
+                            }
+                        }
+
+                        function build_tree($cats,$parent_id,$only_parent = false){
+                            if(is_array($cats) and isset($cats[$parent_id])){
+                                $tree = '<ul>';
+                                if($only_parent==false){
+                                    foreach($cats[$parent_id] as $cat){
+                                        $st = Url::toRoute(['category/update', 'id' => $cat['id']]);
+                                        $tree .= '<li><a href="'.$st.'">'.'<span class="glyphicon glyphicon-chevron-right" style="color:gray; font-size:0.7em;"></span>'.' '.$cat['title'];
+                                        /*$tree .= '<li><a href="'.$cat['id'].'" class="trees">'.$cat['title'];*/
+                                        $tree .=  build_tree($cats,$cat['id']);
+                                        $tree .= '</a></li>';
+                                    }
+                                }elseif(is_numeric($only_parent)){
+                                    $cat = $cats[$parent_id][$only_parent];
+                                    $st = Url::toRoute(['category/update', 'id' => $cat['id']]);
+                                    $tree .= '<li><a href="'.$st.'">'.$cat['title'];
+                                    /*$tree .= '<li><a href="'.$cat['id'].'" class="trees">'.$cat['title'];*/
+                                    $tree .=  build_tree($cats,$cat['id']);
+                                    $tree .= '</a></li>';
+                                }
+                                $tree .= '</ul>';
+                            }
+                            else return null;
+                            return $tree;
+                        }
+                        ?>
+                        <div class="bigtree2"><?php echo build_tree($cats,0); ?></div>
+
+                       </div>
+                     </div>
+                     <img style="margin-top:8%;" src="<?php echo Url::home()?>images/images/folders.jpg"  alt=""/>
+                    </div>
+                </div>
+            </li>
+           
+           
             <li class="active grid"><a class="color4" href="#">Women</a>
                 <div class="megapanel">
                     <div class="row">
@@ -305,7 +362,7 @@ use yii\widgets\Breadcrumbs;
                         <div class="col1"></div>
                         <div class="col1"></div>
                         <div class="col1"></div>
-                        <img src="images/images/nav_img2.jpg" alt=""/>
+                        <img src="<?php echo Url::home()?>images/images/nav_img2.jpg" alt=""/>
                     </div>
                 </div>
             </li>

@@ -214,7 +214,8 @@ class FilterController extends Controller
         
     }
 
-/*--------------------------------------------------------------*/
+    /*--------------------------------------------------------------*/
+    /*Изменить чекбокс*/
     public function actionCheck($id, $id2)
     {
         $model = $this->findModel($id);
@@ -229,6 +230,7 @@ class FilterController extends Controller
     }
 
     /*--------------------------------------------------------------*/
+    /*Изменить значение priznak*/
     public function actionType($id, $id2, $id3) //id - filterkey, id2 - category, id3 - priznak.
     {
         $model = $this->findModel($id);
@@ -240,12 +242,23 @@ class FilterController extends Controller
     }
 
     /*--------------------------------------------------*/
-    public function actionModal($id)
+    /*Перечень значений свойства*/
+    public function actionModal($id) //id - 
     {
         $this->layout = false;
 
-        $model = Filtervalue::find() ->select(['value'])
-            ->where(['filterkey_id' => $id])->all();
+        /*$model = Filtervalue::find() ->select(['value'])
+            ->where(['filterkey_id' => $id])->all();*/
+        $model = $this->findModel($id); //текущая строка FilterKey.
+        $category = $model->category_id; //получить текущую категорию.
+        $key = $model->key; //получить имя ключа (Key).
+
+        $model = Atribute::find()->select(['value'])
+            ->where(['category_id'=>$category])
+            ->andWhere(['key'=>$key])
+            ->andWhere(['<>', 'articles_id' , '-377']) //исключить шаблон.
+            ->groupBy(['value'])
+            ->all();
 
 
         return $this->render('modal', ['body' => $model]);
