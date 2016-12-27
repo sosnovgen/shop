@@ -1970,7 +1970,7 @@ p.cart a:hover {
 	}
 	.wmuSliderPagination {
 		bottom: 50px;
-	}	
+	}
 }
 @media (max-width:800px){
 	.wrap{
@@ -2997,7 +2997,7 @@ p.cart a:hover {
 		border-right: 0;
 	}
 	.span_1_of_left {
-		width: 100%;
+		width: 80%;
 	}
 	.rsidebar {
 		float: none;

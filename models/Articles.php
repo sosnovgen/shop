@@ -23,7 +23,7 @@ class Articles extends \yii\db\ActiveRecord
 
     public function getAtribute()
     {
-        return $this->hasOne(Atribute::className(), ['id' => 'attr_id']);
+        return $this->hasMany(Atribute::className(), ['articles_id' => 'id']);
     }
 
 /*    public function getCategoryTitle()

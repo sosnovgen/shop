@@ -5,6 +5,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\models\Category;
+
 ?>
 
 <?php $this->beginPage() ?>
@@ -16,7 +17,7 @@ use app\models\Category;
     <?= Html::csrfMetaTags() ?>
 
     <script type="text/javascript" src="<?php echo Url::home()?>js/jquery.min.js"></script>
-    
+
     <!-- slider -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -43,7 +44,9 @@ use app\models\Category;
     </script>
     
     <title>shop</title>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="<?php echo Url::home()?>bootstrap/css/bootstrap.css" rel="stylesheet"  type="text/css" media="all" />
+    <link href="<?php echo Url::home()?>bootstrap/css/bootstrap-theme.css" rel="stylesheet"  type="text/css" media="all" />
     <link href="<?php echo Url::home()?>css/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="<?php echo Url::home()?>css/form.css" rel="stylesheet" type="text/css" media="all" />
     <link href="<?php echo Url::home()?>css/site.css" rel="stylesheet" type="text/css" media="all" />
@@ -106,7 +109,7 @@ use app\models\Category;
             });
         });
     </script>
-    
+
 </head>
 <body style="background-color: white;">
 <?php $this->beginBody() ?>
@@ -183,7 +186,7 @@ use app\models\Category;
             <li class="grid"><a class="color2" href="#">Категория</a>
                 <div class="megapanel">
                     <div class="row">
-                        <div class="col1" style="width:40%">
+                        <div class="col4" >
                             <div class="h_nav">
                                 <h4 style="margin-bottom: 1%;">Разделы</h4>
 
@@ -206,7 +209,7 @@ use app\models\Category;
                                 $tree = '<ul>';
                                 if($only_parent==false){
                                     foreach($cats[$parent_id] as $cat){
-                                        $st = Url::toRoute(['category/update', 'id' => $cat['id']]);
+                                        $st = Url::toRoute(['site/articles', 'id' => $cat['id']]);
                                         $tree .= '<li><a href="'.$st.'">'.'<span class="glyphicon glyphicon-chevron-right" style="color:gray; font-size:0.7em;"></span>'.' '.$cat['title'];
                                         /*$tree .= '<li><a href="'.$cat['id'].'" class="trees">'.$cat['title'];*/
                                         $tree .=  build_tree($cats,$cat['id']);
@@ -214,7 +217,7 @@ use app\models\Category;
                                     }
                                 }elseif(is_numeric($only_parent)){
                                     $cat = $cats[$parent_id][$only_parent];
-                                    $st = Url::toRoute(['category/update', 'id' => $cat['id']]);
+                                    $st = Url::toRoute(['site/articles', 'id' => $cat['id']]);
                                     $tree .= '<li><a href="'.$st.'">'.$cat['title'];
                                     /*$tree .= '<li><a href="'.$cat['id'].'" class="trees">'.$cat['title'];*/
                                     $tree .=  build_tree($cats,$cat['id']);
@@ -230,7 +233,7 @@ use app\models\Category;
 
                        </div>
                      </div>
-                     <img style="margin-top:8%;" src="<?php echo Url::home()?>images/images/folders.jpg"  alt=""/>
+                     <img style="margin: 8% 0 0 4%; float: left; " src="<?php echo Url::home()?>images/images/folders.jpg"  alt=""/>
                     </div>
                 </div>
             </li>

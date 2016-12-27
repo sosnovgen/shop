@@ -9,6 +9,9 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Filterkey;
+use app\models\Category;
+use app\models\Articles;
+use app\models\Atribute;
 
 
 class SiteController extends Controller
@@ -132,7 +135,15 @@ class SiteController extends Controller
                     ->where(['category_id' => $id])
                     ->andWhere(['enable' => true])->all();
 
-        return $this->render('articles', ['filter' => $filter]);
+        $model = Articles::find()
+            ->where(['category_id' => $id])
+            ->all();
+
+        return $this->render('articles',
+            [
+                'filter' => $filter,
+                'model' => $model,
+            ]);
     }
 
     /*-----------------  Test  --------------------------*/
@@ -145,6 +156,19 @@ class SiteController extends Controller
         return $this->render('test', ['filter' => $filter]);
         
     }
-    
+    /*--------------------------------------------------*/
+    public function actionCategory($id) //id - категория.
+    {
+        $model = Articles::find()
+            ->where(['category_id' => $id])
+            ->all();
+
+
+        return $this->render('test',
+            ['model' => $model,
+
+            ]);
+
+    }    
     
 }

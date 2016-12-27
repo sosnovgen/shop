@@ -5,6 +5,7 @@ use yii\helpers\Url;
 
 <div class="login">
     <div class="wrap">
+        <div class="col-md-3">
         <div class="rsidebar span_1_of_left">
 
             <section  class="sky-form">
@@ -128,7 +129,7 @@ use yii\helpers\Url;
                 </div>
             </section>
         </div>
-
+        </div>
         <div class="clear"></div>
     </div>
 </div>
