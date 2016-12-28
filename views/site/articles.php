@@ -14,7 +14,6 @@ use app\models\Atribute;
                         <div class="check-input">
                             <h4><?php echo $row->key ?></h4>
 
-                            
                             <?php
                                 $value = Atribute::find()
                                     ->where(['category_id'=>$row->category_id])
@@ -42,18 +41,95 @@ use app\models\Atribute;
                             </ul>
                         </div>
 
-
-
                     <?php endforeach;  ?>
                 </section>
-
-
             </div>
         </div>
+
         <div class="col-md-9">
-            <div class="row">
-                <div class="">
-                    <?php foreach ($model as $row): ?>
+
+            <?php  if (sizeof($model))
+            {echo ('<div class="menu-sort">
+                        <div class="menu-sort-by">
+                            <label>Sort By</label>
+                            <select>
+                                <option value="">
+                                    Популярное               </option>
+                                <option value="">
+                                    Цена : От высокой к низкой               </option>
+                                <option value="">
+                                    Цена : От низкой к высокой               </option>
+                            </select>
+                            <a href=""><img src="'.Url::home().'images/images/arrow2.gif" alt="" class="v-middle"></a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+            ');}
+?>
+
+
+                <?php $i = 0;  ?>
+                <?php foreach ($model as $row): ?>
+                <?php if ($i == 0) {echo('<div class="box1">');}  ?>
+                  <div class="col_1_of_single1 span_1_of_single1">
+                    <a href="single.html">
+                        <div class="view1 view-fifth1">
+                            <div class="top_box">
+                                <h3 class="m_1"><?php echo $row->title  ?></h3>
+                                <p class="m_2">индекс: <?php echo $row->id  ?></p>
+                                <div class="grid_img">
+                                    <div class="css3"><img src="<?php echo Url::home().$row->preview ?>" alt=""/></div>
+                                    <div class="mask1">
+                                        <div class="info">Quick View</div>
+                                    </div>
+                                </div>
+                                <div class="price">$ <?php echo $row->cena ?></div>
+                            </div>
+                        </div>
+
+                        <ul class="list2">
+                            <li>
+                                <img src="<?php echo Url::home()?>images/images/plus.png" alt=""/>
+                                <ul class="icon1 sub-icon1 profile_img">
+                                    <li><a class="active-icon c1" href="#">В корзину </a>
+                                        <ul class="sub-icon1 list">
+                                            <li><h3>sed diam nonummy</h3><a href=""></a></li>
+                                            <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                    </a>
+                </div>
+                <?php
+                    $i = $i+1;
+                    if($i == 3){
+                        echo ('<div class="clear"></div></div>');
+                    $i = 0;
+                    }
+
+                ?>
+                <?php endforeach; ?>
+                <?php if($i <> 3) {echo ('<div class="clear"></div></div>');} ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <?php foreach ($model as $row): ?>
                         <table class="table small" style="margin-bottom: 0;">
                             <tr>
                                 <td><?php echo $row->id;  ?></td>
@@ -73,12 +149,7 @@ use app\models\Atribute;
                         <?php endforeach; ?>
                     <?php endforeach; ?>
 
-                </div>
-            </div>
-
-
-
-        </div>
+               </div>
 
         <div class="clear"></div>
     </div>

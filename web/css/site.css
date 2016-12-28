@@ -74,4 +74,20 @@ label .input-box{
 
 }
 
-/*---------------- 404 --------------------*/
+/*---------------- menu sort --------------------*/
+.menu-sort{
+    margin: 0 0 12px;
+    overflow: hidden;
+    background: #F7F7F7;
+    padding: 8px;
+    border: 1px solid #E6E6E6;
+    width: 98.9%;
+}
+.menu-sort-by{
+    color: #555;
+    font-size: 0.8125em;
+}
+
+.css3 img{
+    max-width: 70%;
+}
