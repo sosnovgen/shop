@@ -10,4 +10,11 @@ use app\models\Atribute;
 
 <h4>Test</h4>
 <br>
-<?php var_dump($model); ?>
+<?php
+
+    $session = Yii::$app->session;
+    $row = $session['Наушники'];
+     var_dump($row);
+
+
+ ?>

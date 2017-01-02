@@ -131,10 +131,17 @@ class SiteController extends Controller
 /*-----------------  list articles  --------------------------*/
     public function actionArticles($id) //id - category.
     {
+        /*----------  боковая панель фильтра  ---------------*/
         $filter = Filterkey::find()
                     ->where(['category_id' => $id])
                     ->andWhere(['enable' => true])->all();
 
+        /*----------  боковая панель фильтра  ---------------*/
+        $session = Yii::$app->session;
+        $my_array = $session[$filter[0]->category->title]; //массив "категория" в сессии.
+
+
+        /*----------  вывод списка товаров ----------------------*/
         $model = Articles::find()
             ->where(['category_id' => $id])
             ->all();
@@ -143,18 +150,16 @@ class SiteController extends Controller
             [
                 'filter' => $filter,
                 'model' => $model,
+                'my_array' => $my_array,
             ]);
     }
 
     /*-----------------  Test  --------------------------*/
-    public function actionTest($id)
+    public function actionTest()
     {
-        $filter = Filterkey::find()
-            ->where(['category_id' => $id])
-            ->andWhere(['enable' => true])->all();
-
-        return $this->render('test', ['filter' => $filter]);
-        
+  
+          return $this->render('test');
+       
     }
     /*--------------------------------------------------*/
     public function actionCategory($id) //id - категория.
@@ -165,10 +170,49 @@ class SiteController extends Controller
 
 
         return $this->render('test',
-            ['model' => $model,
-
+            [
+                'model' => $model,
             ]);
 
-    }    
-    
+    }
+
+    /*------- click on checkbox  ----------------*/
+    public function actionCheckbox($category, $key, $value)
+    {
+        $session = Yii::$app->session;
+        /*$session->remove($category);*/
+        $my_array = $session[$category]; //массив "категория" в сессии.
+         if(isset($my_array[$key])) //есть такой ключ?
+           {
+             //есть такое значение?
+             $id = array_search($value, $my_array[$key]); //пробуем найти его ключ?
+             if ($id !== false) //ключ значения существует - удалить пару (ключ-значение).
+                { unset($my_array[$key][$id]);
+                    if (sizeof($my_array[$key])== 0) {unset($my_array[$key]);} //если пустой ключ - удалить.
+                }
+            else
+                { $my_array[$key][] = $value; } //если значения нет - добавить.
+           }
+            else //нет такого ключа - создать ключ и значение
+           { $my_array[$key][] = $value; }
+
+        $session[$category] = $my_array ; //сохранить изменения в сессию.
+
+        return $this->redirect(Yii::$app->request->referrer);
+
+        /*return $this->redirect(['test',
+
+              'category_id' => $category,
+              'key' => $key,
+              'value' => $value,
+
+          ]);*/
+    }
+    public function actionDelsession()
+    {
+        $session = Yii::$app->session;
+        $session->remove('Наушники');
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
 }

@@ -218,7 +218,7 @@ class FilterController extends Controller
     /*Изменить чекбокс*/
     public function actionCheck($id, $id2)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($id); //id - FilterKey, id2 - category_id.
 
         if ($model->enable) {$model->enable = 0;}
          else {$model->enable = 1;}

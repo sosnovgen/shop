@@ -9,45 +9,38 @@ use app\models\Atribute;
         <div class="col-md-3">
             <div class="sb-filter">
 
-
                 <section  class="sb-section">
                     <?php foreach ($filter as $row): ?>
                         <div class="check-input">
                             <h4><?php echo $row->key ?></h4>
+
                             <?php
-                                $value = Atribute::find()
-                                    ->where(['category_id'=>$row->category_id])
-                                    ->andWhere(['key'=>$row->key])
-                                    ->groupBy('value')
-                                    ->all();
-                                ?>
+                            $value = Atribute::find()
+                                ->where(['category_id'=>$row->category_id])
+                                ->andWhere(['key'=>$row->key])
+                                ->groupBy('value')
+                                ->all();
+                            ?>
                             <ul>
                                 <?php foreach ($value as $st): ?>
-                                  <li><label class="input-box"><input type="checkbox" name="checkbox-sb"
-                                              <?php if(isset($my_array[$row->key])) //есть такой ключ?
-                                              { //есть такое значение?
-                                                  $id = array_search($st->value, $my_array[$row->key]); //пробуем найти его ключ?
-                                                  if ($id !== false) //ключ значения существует - выводим "птичку".
-                                                  {
-                                                      echo('checked');
-                                                  }
-                                              }?>
-                                            data-category = "<?php echo $row->category->title ?>"
-                                            data-key = "<?php echo $row->key ?>"
-                                            data-value ="<?php echo $st->value ?>"
-                                        >
+                                    <li><label class="input-box"><input type="checkbox" name="checkbox"
+                                                                        onchange="window.location.href='<?php echo Url::toRoute(['site/checkbox',
+                                                                            'category' => $row->category->title,
+                                                                            'key' => $row->key,
+                                                                            'value' => $st->value,
+                                                                        ]) ?>'">
 
-                                        <?php echo $st->value ?>  &nbsp;(
+                                            <?php echo $st->value ?>  &nbsp;(
 
-                                        <?php $kol = Atribute::find()
-                                            ->where(['category_id'=>$st->category_id]) //category
-                                            ->andWhere(['value'=>$st->value]) //value
-                                            ->andWhere(['<>', 'articles_id' , '-377']) //исключить шаблон.
-                                            ->count();
-                                        echo $kol; //кол.
-                                        ?>
+                                            <?php $kol = Atribute::find()
+                                                ->where(['category_id'=>$st->category_id]) //category
+                                                ->andWhere(['value'=>$st->value]) //value
+                                                ->andWhere(['<>', 'articles_id' , '-377']) //исключить шаблон.
+                                                ->count();
+                                            echo $kol; //кол.
+                                            ?>
 
-                                        )</label></li>
+                                            )</label></li>
 
                                 <?php endforeach;  ?>
                             </ul>
@@ -57,10 +50,7 @@ use app\models\Atribute;
                 </section>
             </div>
         </div>
-<?php 
 
-
-?>
         <div class="col-md-9">
 
             <?php  if (sizeof($model))
@@ -80,13 +70,13 @@ use app\models\Atribute;
                         <div class="clear"></div>
                     </div>
             ');}
-?>
+            ?>
 
 
-                <?php $i = 0;  ?>
-                <?php foreach ($model as $row): ?>
+            <?php $i = 0;  ?>
+            <?php foreach ($model as $row): ?>
                 <?php if ($i == 0) {echo('<div class="box1">');}  ?>
-                  <div class="col_1_of_single1 span_1_of_single1">
+                <div class="col_1_of_single1 span_1_of_single1">
                     <a href="single.html">
                         <div class="view1 view-fifth1">
                             <div class="top_box">
@@ -119,38 +109,38 @@ use app\models\Atribute;
                     </a>
                 </div>
                 <?php
-                    $i = $i+1;
-                    if($i == 3){
-                        echo ('<div class="clear"></div></div>');
+                $i = $i+1;
+                if($i == 3){
+                    echo ('<div class="clear"></div></div>');
                     $i = 0;
-                    }
+                }
 
                 ?>
-                <?php endforeach; ?>
-                <?php if($i <> 3) {echo ('<div class="clear"></div></div>');} ?>
+            <?php endforeach; ?>
+            <?php if($i <> 3) {echo ('<div class="clear"></div></div>');} ?>
 
 
             <?php foreach ($model as $row): ?>
-                        <table class="table small" style="margin-bottom: 0;">
-                            <tr>
-                                <td><?php echo $row->id;  ?></td>
-                                <td><?php echo $row->title;  ?></td>
-                                <td><?php echo $row->cena;  ?></td>
-                            </tr>
-                        </table>
-                            <?php $attr = $row ->atribute; ?>
-                            <?php foreach ($attr as $atr): ?>
-                            <table class="table small" style="margin-bottom: 0;width: 30%">
-                                <tr>
-                                    <td><?php echo $atr->key;  ?></td>
-                                    <td><?php echo $atr->value;  ?></td>
-                                </tr>
-                            </table>
+                <table class="table small" style="margin-bottom: 0;">
+                    <tr>
+                        <td><?php echo $row->id;  ?></td>
+                        <td><?php echo $row->title;  ?></td>
+                        <td><?php echo $row->cena;  ?></td>
+                    </tr>
+                </table>
+                <?php $attr = $row ->atribute; ?>
+                <?php foreach ($attr as $atr): ?>
+                    <table class="table small" style="margin-bottom: 0;width: 30%">
+                        <tr>
+                            <td><?php echo $atr->key;  ?></td>
+                            <td><?php echo $atr->value;  ?></td>
+                        </tr>
+                    </table>
 
-                        <?php endforeach; ?>
-                    <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php endforeach; ?>
 
-               </div>
+        </div>
 
         <div class="clear"></div>
     </div>

@@ -16,6 +16,7 @@ use app\models\Category;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
 
+    <link rel="shortcut icon" href="<?php echo Url::home()?>images/icon_logo_16.png" type="image/png">
     <script type="text/javascript" src="<?php echo Url::home()?>js/jquery.min.js"></script>
 
     <!-- slider -->
@@ -53,6 +54,7 @@ use app\models\Category;
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 
     <script src="<?php echo Url::home()?>js/jquery.easydropdown.js"></script>
+    <script src="<?php echo Url::home()?>js/tale.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $(".dropdown img.flag").addClass("flagvisibility");
@@ -144,8 +146,8 @@ use app\models\Category;
                                 <h4>Популярные</h4>
                                 <ul>
                                     <li><a href="<?php echo Url::toRoute(['site/articles', 'id' => '7'])?>">Фильтр</a></li>
-                                    <li><a href="<?php echo Url::toRoute(['site/test', 'id' => '7'])?>">Test</a></li>
-                                    <li><a href="shop.html">women</a></li>
+                                    <li><a href="<?php echo Url::toRoute(['site/test', 'category' => '7'])?>">Сессия</a></li>
+                                    <li><a href="<?php echo Url::toRoute(['site/delsession'])?>">Очистить сессию</a></li>
                                     <li><a href="shop.html">accessories</a></li>
                                     <li><a href="shop.html">kids</a></li>
                                     <li><a href="shop.html">login</a></li>

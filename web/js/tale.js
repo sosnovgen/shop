@@ -75,6 +75,32 @@ $(document).ready(function(){
             .load($(this).attr('href'));
     });
 
+    /*-------------  Filter CheckBox  ---------------*/
+    $('[name="checkbox-sb"]').change(function(e) {
+        e.preventDefault();
+
+        var key = $(this).attr("data-key"); //Получить свойство.
+        var category = $(this).attr("data-category"); //Получить category->title.
+        var value = $(this).attr("data-value"); //Получить значение свойства.
+
+        /*$(this).checked = !$(this).checked;*/
+        /*alert(key+' '+category+' '+value);*/
+
+        $.ajax({
+            type: 'GET',
+            /*dataType: 'json',*/
+            url: 'checkbox',
+            data: { category: category, key: key, value: value},
+            success: function () {
+                console.log('Успешно! (CheckBox)');
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.responseText);
+            }
+        });
+
+
+    });
 
 });
 
