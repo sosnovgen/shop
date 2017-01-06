@@ -131,25 +131,45 @@ class SiteController extends Controller
 /*-----------------  list articles  --------------------------*/
     public function actionArticles($id) //id - category.
     {
-        /*----------  боковая панель фильтра  ---------------*/
+        //боковая панель фильтра
         $filter = Filterkey::find()
                     ->where(['category_id' => $id])
                     ->andWhere(['enable' => true])->all();
 
-        /*----------  боковая панель фильтра  ---------------*/
+        //получить переменную сессии по имени категории
         $session = Yii::$app->session;
         $my_array = $session[$filter[0]->category->title]; //массив "категория" в сессии.
 
+        //сформировать строку условия.
+ /*       $conditions = '[\'or\' '; //566 - заглушка.
+        foreach ($my_array as $key => $row) {
+            foreach ($row as $st) {
+                $conditions .= ', [and, [\'key\' => '.$key.'\', \'value\' => \''.$st.'\' ]]';
+            }
+            $conditions .=']';
+        }*/
 
-        /*----------  вывод списка товаров ----------------------*/
-        $model = Articles::find()
-            ->where(['category_id' => $id])
+        /*--------  вывод списка товаров -------- */
+        //1. отобрать товары по условию.
+        $model = Articles::find()/**/
+            /*->where(['category_id' => $id])*/
+            ->joinWith('atributes')->where(['and', ['key' => 'длина шнура', 'value' => '1,1 метра']])
             ->all();
+
+        $list = array(); //пустой.
+        //2. отобрать товары заданной категории
+        foreach ($model as $row)
+        {
+            if($row->category_id == $id)
+            {
+              $list[]= $row;
+            }
+        }
 
         return $this->render('articles',
             [
                 'filter' => $filter,
-                'model' => $model,
+                'model' => $list,
                 'my_array' => $my_array,
             ]);
     }
@@ -157,10 +177,30 @@ class SiteController extends Controller
     /*-----------------  Test  --------------------------*/
     public function actionTest()
     {
-  
+
           return $this->render('test');
        
     }
+
+    /*-----------------  Cond  --------------------------*/
+    public function actionCondition()
+    {
+        //получить переменную сессии по имени категории
+        $session = Yii::$app->session;
+        $my_array = $session['Наушники']; //массив "Наушники" в сессии.
+
+        //сформировать строку условия.
+        $conditions = '->andWhere([\'or\', [\'key\' => \'566\']'; //566 - заглушка.
+        foreach ($my_array as $key => $row) {
+           foreach ($row as $st) {
+            $conditions .= ', [and, [\'key\' => '.$key.'\', \'value\' => \''.$st.'\' ]]';
+            }
+            $conditions .='])';
+        }
+
+        return $this->render('cond', ['conditions' => $conditions]);
+    }
+ 
     /*--------------------------------------------------*/
     public function actionCategory($id) //id - категория.
     {
@@ -208,6 +248,10 @@ class SiteController extends Controller
 
           ]);*/
     }
+
+
+
+    /*------- delete  ----------------*/
     public function actionDelsession()
     {
         $session = Yii::$app->session;
@@ -215,4 +259,24 @@ class SiteController extends Controller
 
         return $this->redirect(Yii::$app->request->referrer);
     }
+
+
+
+    /*------- list of sessions  ----------------*/
+    public function actionSes()
+    {
+        $category = Filterkey::find()
+            ->select(['category_id'])
+            ->distinct()
+            ->all();
+
+        return $this->render('ses',
+            [
+                'category' => $category,
+            ]
+        );
+    }
+
+
+
 }

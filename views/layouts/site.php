@@ -145,7 +145,8 @@ use app\models\Category;
                             <div class="h_nav">
                                 <h4>Популярные</h4>
                                 <ul>
-                                    <li><a href="<?php echo Url::toRoute(['site/articles', 'id' => '7'])?>">Фильтр</a></li>
+                                    <li><a href="<?php echo Url::toRoute(['site/condition'])?>">Test</a></li>
+                                    <li><a href="<?php echo Url::toRoute(['site/ses'])?>">Список сессий</a></li>
                                     <li><a href="<?php echo Url::toRoute(['site/test', 'category' => '7'])?>">Сессия</a></li>
                                     <li><a href="<?php echo Url::toRoute(['site/delsession'])?>">Очистить сессию</a></li>
                                     <li><a href="shop.html">accessories</a></li>

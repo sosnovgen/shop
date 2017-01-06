@@ -21,7 +21,7 @@ class Articles extends \yii\db\ActiveRecord
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
-    public function getAtribute()
+    public function getAtributes()
     {
         return $this->hasMany(Atribute::className(), ['articles_id' => 'id']);
     }

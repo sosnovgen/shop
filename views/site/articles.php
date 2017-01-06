@@ -131,14 +131,14 @@ use app\models\Atribute;
 
 
             <?php foreach ($model as $row): ?>
-                        <table class="table small" style="margin-bottom: 0;">
-                            <tr>
+                        <table class="table small" >
+                            <tr >
                                 <td><?php echo $row->id;  ?></td>
                                 <td><?php echo $row->title;  ?></td>
                                 <td><?php echo $row->cena;  ?></td>
                             </tr>
                         </table>
-                            <?php $attr = $row ->atribute; ?>
+                            <?php $attr = $row ->atributes; ?>
                             <?php foreach ($attr as $atr): ?>
                             <table class="table small" style="margin-bottom: 0;width: 30%">
                                 <tr>
