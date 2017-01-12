@@ -100,11 +100,7 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return string
-     */
+ 
     public function actionContact()
     {
         $model = new ContactForm();
@@ -118,11 +114,7 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
+ 
     public function actionAbout()
     {
         return $this->render('about');
@@ -135,11 +127,18 @@ class SiteController extends Controller
         $filter = Filterkey::find()
                     ->where(['category_id' => $id])
                     ->andWhere(['enable' => true])->all();
+        if(!sizeof($filter) == 0){
+            //получить переменную сессии по имени категории
+            $session = Yii::$app->session;
+            $my_array = $session[$filter[0]->category->title]; //массив "категория" в сессии.
+        }
+        else {
+            //очистить массив
+            unset($my_array);
+            $my_array = array();
 
-        //получить переменную сессии по имени категории
-        $session = Yii::$app->session;
-        $my_array = $session[$filter[0]->category->title]; //массив "категория" в сессии.
-
+        }
+        
        /*--------  вывод списка товаров -------- */
         $model = Articles::find()/**/
             ->where(['category_id' => $id])
@@ -147,7 +146,7 @@ class SiteController extends Controller
             ->all();
 
         //есть фильтрация?
-        if(!is_null($my_array)) {
+        if(!sizeof($my_array) == 0) {
             $list = array(); //пустой.
 
             //Фильтр работает так:
@@ -190,29 +189,35 @@ class SiteController extends Controller
                 }
                 $items[$lis->id] = $m; //кол.повторений
             }
-            
-            
+
+
             //создание массива:[id],с числом повторений
             //равных числу ключей фильтра.
             $temp = array();
             foreach ($items as $it => $col) {
                 if ($col == $n) {
-                    $temp[] = $it; //список отюранных записей товара (их id)
+                    $temp[] = $it; //список отбранных записей товара (их id)
                 }
             }
 
+            if(!sizeof($temp) == 0){
             //из массива $list копируем отобранные записи.
             //(строки товараов отобранных фильтром)
-            $strings = array();
-            foreach ($list as $row) {
-                foreach ($temp as $it){
-                    if($row->id == $it){
-                        $strings[] = $row;
+                foreach ($temp as $t) {
+                    foreach ($list as $row){
+                        if($row->id == $t){
+                            $strings[] = $row;
+                            break; //передать только одну строки (исключить дубли)
+                        }
+
                     }
                 }
 
             }
-        }
+            else {
+                $strings = array(); //если ничего не отфильтровано - пустой архив.
+            }
+         }
 
         else
             {
@@ -289,7 +294,7 @@ class SiteController extends Controller
                 { unset($my_array[$key][$id]);
                     if (sizeof($my_array[$key])== 0) {unset($my_array[$key]);} //если пустой ключ - удалить.
                 }
-            else
+             else
                 { $my_array[$key][] = $value; } //если значения нет - добавить.
            }
             else //нет такого ключа - создать ключ и значение
@@ -314,7 +319,7 @@ class SiteController extends Controller
     public function actionDelsession()
     {
         $session = Yii::$app->session;
-        $session->remove('Наушники');
+        $session->remove('Дрели и миксеры');
 
         return $this->redirect(Yii::$app->request->referrer);
     }

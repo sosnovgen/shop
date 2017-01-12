@@ -12,9 +12,9 @@ use app\models\Atribute;
 <br>
 <?php
 
-    $session = Yii::$app->session;
-    $row = $session['Наушники'];
-     var_dump($row);
+ /*   $session = Yii::$app->session;
+    $row = $session['Дрели и миксеры'];
+     var_dump($row);*/
 
-
+var_dump($temp);
  ?>
